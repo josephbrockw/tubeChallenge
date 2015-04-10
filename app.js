@@ -1,9 +1,23 @@
 $('Document').ready(function() {
-	function search() {
-		$.get('https://www.googleapis.com/youtube/v3/search?part=snippet&q=derrickrose&key=AIzaSyBcN2ThZ4YKobSTSIUB9a07Api-WGa_4B0', function(data){
-	    	myData = data.Search;
-	    	display(data.items);
-	    	console.log(data.items);
+	// function search() {
+	// 	$.get('https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + searchterm + '&key=AIzaSyBcN2ThZ4YKobSTSIUB9a07Api-WGa_4B0', function(data){
+	//     	myData = data.Search;
+	//     	display(data.items);
+	//     	console.log(data.items);
+	// 	});
+	// }
+
+	function search(query) {
+		$.getJSON("https://www.googleapis.com/youtube/v3/search",
+		{
+			"part": "snippet",
+			"key": "AIzaSyBcN2ThZ4YKobSTSIUB9a07Api-WGa_4B0",
+			"q": query
+		},
+		function(data) {
+			myData = data.Search;
+			display(data.items);
+			console.log(data.items);
 		});
 	}
 
@@ -14,8 +28,13 @@ $('Document').ready(function() {
 		});
 	}
 
-
-	search();
+	
+	$('#buttons').submit(function(event) {
+		event.preventDefault();
+		search($('#query').val());
+	})
+	
+	
 
 	// function displaySearchResults(videos) {
 	// 	var html = "";
