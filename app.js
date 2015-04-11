@@ -31,6 +31,7 @@ $('Document').ready(function() {
 	
 	$('#buttons').submit(function(event) {
 		event.preventDefault();
+		$('#search-list').empty();
 		search($('#query').val());
 	})
 	
